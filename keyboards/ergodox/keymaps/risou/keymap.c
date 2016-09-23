@@ -1,6 +1,7 @@
-#include "ergodox_ez.h"
+#include "ergodox.h"
 #include "debug.h"
 #include "action_layer.h"
+#include "version.h"
 
 #define BASE 0 // default layer
 #define SYMB 1 // symbols
@@ -28,7 +29,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |ace   | End  |       | PgDn |        |      |
  *                                 `--------------------'       `----------------------'
  */
-/* Keymap 0: Basic layer(risou)
+/* Keymap 0: Basic layer(risou) old - 2016/09/23
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |   =    |   1  |   2  |   3  |   4  |   5  | Hyper|           | Meh  |   6  |   7  |   8  |   9  |   0  |   -    |
@@ -49,6 +50,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      | Alt  |       | Del  |        |      |
  *                                 `--------------------'       `----------------------'
  */
+/* Keymap 0: Basic layer(risou) new 2016/09/23 -
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * |   =    |   1  |   2  |   3  |   4  |   5  | Hyper|           | Meh  |   6  |   7  |   8  |   9  |   0  |   -    |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * | Tab    |   Q  |   W  |   E  |   R  |   T  |  L1  |           |  L2  |   Y  |   U  |   I  |   O  |   P  |   \    |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * | Ctrl   |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  |   "'   |
+ * |--------+------+------+------+------+------|CmdLFT|           |CmdRHT|------+------+------+------+------+--------|
+ * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |  L1  |  `~  |  Alt | Left | Right|                                       |  Up  | Down |   [  |   ]  |  L1  |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        | Ctrl |CmdAlt|       | Alt  |  Ctrl  |
+ *                                 ,------|------|------|       |------+--------+------.
+ *                                 |      |      | Esc  |       | Del  |        |      |
+ *                                 |LShift| Cmd  |------|       |------|  Enter |  BS  |
+ *                                 |/Space|      | Alt  |       | Space|        |      |
+ *                                 `--------------------'       `----------------------'
+ */
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
 // Otherwise, it needs KC_*
 [BASE] = KEYMAP(  // layer 0 : default
@@ -60,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LT(SYMB,KC_NO), KC_GRV,       KC_LALT,KC_LEFT,KC_RGHT,
                                               KC_LCTL,  MT((MOD_LALT | MOD_LGUI), KC_NO),
                                                               KC_ESC,
-                                               KC_SPC,KC_LGUI,KC_LALT,
+                                               SFT_T(KC_SPC),KC_LGUI,KC_LALT,
         // right hand
              MEH_T(KC_NO),                      KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             KC_MINS,
              TG(MDIA),                          KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,             KC_BSLS,
@@ -68,8 +90,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              ACTION_MODS_KEY(MOD_LGUI, KC_RGHT),KC_N,   KC_M,   KC_COMM,KC_DOT, KC_SLSH,          KC_RSFT,
                                                 KC_UP,  KC_DOWN,KC_LBRC,KC_RBRC,           LT(SYMB,KC_NO),
              KC_RALT,        KC_RCTL,
-             KC_RGUI,
-             KC_DELT,KC_ENT, KC_BSPC
+             KC_DELT,
+             KC_SPC,KC_ENT, KC_BSPC
     ),
 /* Keymap 1: Symbol Layer(default)
  *
